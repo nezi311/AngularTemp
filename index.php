@@ -9,7 +9,7 @@
   if(isset($_GET['controller']))
     $controller = $_GET['controller'];
   else
-    $controller = 'books';
+    $controller = 'Books';
   if(isset($_GET['action']))
     $action = $_GET['action'];
   else

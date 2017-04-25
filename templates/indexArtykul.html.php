@@ -43,7 +43,8 @@
   <tr ng-repeat="artykul in artykuly">
     </td>
     <td>
-        <span ng-hide="artykul.editMode" >{{ artykul.tresc }}</span>
+
+        <span ng-hide="artykul.editMode" ng-bind-html="artykul.tresc"></span>
 
         <textarea ng-if="artykul.editMode" class="animate-if" class="form-control" ng-model="artykul.tresc"
                ng-show="artykul.editMode"

@@ -26,7 +26,12 @@ app.controller('myController', function($scope, $http)
                     $scope.artykuly = response.data.artykuly;
                     // domyślna wartość trybu edit
                     for(artykul of $scope.artykuly)
-                        artykul.editMode = false;
+                    {
+                      artykul.editMode = false;
+                      console.log($scope.artykuly);
+                      //artykul.tresc = $sce.trustAsHtml(artykul.tresc);
+                    }
+
                 },
                 // błąd
                 function (response)

@@ -10,7 +10,7 @@
 		private static $password;
 		private static $database;
 
-		public static function setDBConfig($database ='testagnular', 
+		public static function setDBConfig($database ='testagnular',
 			$username ='user', $password = '123456', $host = 'localhost',
 			$type = 'mysql', $port = '3306'){
 
