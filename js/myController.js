@@ -4,60 +4,18 @@
 // $ oznacz zmienne z przestrzeni AngularJS
 app.controller('myController', function($scope, $http)
 {
+
+
+
     //zmienna komunikatów błędów
     $scope.msg = '';
     //wyświetlanie wszytskich kategorii
-    $scope.getAllAut = function ()
-    {
-        $scope.sortType = 'id';
-        $scope.sortReverse = false;
-        $http.get("engine.php?action=indexAutor")
-        .then(
-                // sukces
-                function (response)
-                {
-                    // odczyt komunikatów
-                    $scope.msg = response.data.msg;
-                    // odczyt danych
 
-                    $scope.authors = response.data.authors;
-
-                },
-                // błąd
-                function (response)
-                {
-                    // ustawienie komunikatu
-                    $scope.msg = response.statusText;
-                }
-      );
-    }
-    $scope.getAllKat = function ()
-    {
-        $scope.sortType = 'id';
-        $scope.sortReverse = false;
-        $http.get("engine.php?action=indexKategoria")
-        .then(
-                // sukces
-                function (response)
-                {
-                    // odczyt komunikatów
-                    $scope.msg = response.data.msg;
-                    // odczyt danych
-                    $scope.categories = response.data.categories;
-                },
-                // błąd
-                function (response)
-                {
-                    // ustawienie komunikatu
-                    $scope.msg = response.statusText;
-                }
-        );
-    }
     $scope.getAll = function ()
     {
         $scope.sortType = 'id';
         $scope.sortReverse = false;
-        $http.get("engine.php?action=index")
+        $http.get("index.php?action=getAll")
         .then(
                 // sukces
                 function (response)
@@ -65,10 +23,10 @@ app.controller('myController', function($scope, $http)
                     // odczyt komunikatów
                     $scope.msg = response.data.msg;
                     // odczyt danych
-                    $scope.books = response.data.books;
+                    $scope.artykuly = response.data.artykuly;
                     // domyślna wartość trybu edit
-                    for(book of $scope.books)
-                        book.editMode = false;
+                    for(artykul of $scope.artykuly)
+                        artykul.editMode = false;
                 },
                 // błąd
                 function (response)
@@ -79,48 +37,21 @@ app.controller('myController', function($scope, $http)
         );
     }
     //usuwanie wybranej kategorii
-    $scope.delete = function (book)
-    {
-        index = $scope.books.indexOf(book);
-        $http.get("engine.php",{params: {'action': 'delete', id: $scope.books[index].id}})
-        .then(
-                // sukces
-                function (response)
-                {
-                    //kasujemy poprzednie komunikaty
-                    $scope.msg = response.data.msg;
-                    //usuwamy po stronie klienta
-                    if($scope.msg === 'OK')
-                        $scope.books.splice(index,1);
-
-
-                },
-                // błąd
-                function (response)
-                {
-                    //kasujemy poprzednie komunikaty
-                    $scope.msg = response.statusText;
-                }
-      );
-    }
     //aktualizacja wybranej kategorii
-    $scope.update = function (book)
+    $scope.update = function (artykul)
     {
-        index = $scope.books.indexOf(book);
-        $http.get("engine.php",
+        index = $scope.artykuly.indexOf(artykul);
+        $http.get("index.php",
                {params: {'action': 'update',
-                         id: $scope.books[index].id,
-                         tytul: $scope.books[index].tytul,
-                         id_autor:$scope.books[index].id_autor,
-                         rok_wydania: $scope.books[index].rok_wydania,
-                         id_kategoria:$scope.books[index].id_kategoria
+                         id: $scope.artykuly[index].id,
+                         tresc: $scope.artykuly[index].tresc,
                         }})
              .then(
                 // sukces
                 function (response)
                 {
                     $scope.msg = response.data.msg;
-                    $scope.books[index] = response.data.book;
+                    $scope.artykuly[index] = response.data.artykul;
                 },
                 // błąd
                 function (response)
